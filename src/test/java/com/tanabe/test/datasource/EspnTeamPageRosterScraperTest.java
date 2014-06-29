@@ -4,8 +4,7 @@ import com.tanabe.ffbdh.datasource.EspnTeamPageRosterScraper;
 import com.tanabe.ffbdh.nfl.team.NflTeam;
 import org.junit.Test;
 
-import java.io.IOException;
-
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
 
 /**
@@ -18,14 +17,15 @@ public class EspnTeamPageRosterScraperTest extends EspnTeamPageRosterScraper {
 
         try {
             scrapeForRosterInfo();
-        } catch(IOException ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             fail("EspnTeamPageRosterScraperTest failed to grab the page for the Broncos");
         }
     }
 
     @Test
-    public void didEspnTeamPageRosterScraperGetEnoughPlayers(){
-
+    public void didEspnTeamPageRosterScraperGetEnoughPlayers() {
+        int playersParsed = players.size();
+        assertEquals(true, playersParsed == 30);
     }
 }

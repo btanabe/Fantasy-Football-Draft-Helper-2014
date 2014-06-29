@@ -6,7 +6,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.LinkedHashMap;
 
 /**
@@ -16,22 +15,22 @@ public class EspnTeamPageUrlScraper extends WebScraper {
     protected static final String baseUrl = "http://espn.go.com/nfl/players";
 
 
-    public static LinkedHashMap<NflTeam, String> scrapeForPageUrls() throws IOException {
+    public static LinkedHashMap<NflTeam, String> scrapeForPageUrls() throws Exception {
         return scrapeForPageUrlsWorker();
     }
 
-        protected static LinkedHashMap<NflTeam, String> scrapeForPageUrlsWorker() throws IOException {
-            LinkedHashMap<NflTeam, String> teamRosterPageUrls = new LinkedHashMap<NflTeam, String>(32);
+    protected static LinkedHashMap<NflTeam, String> scrapeForPageUrlsWorker() throws Exception {
+        LinkedHashMap<NflTeam, String> teamRosterPageUrls = new LinkedHashMap<NflTeam, String>(32);
 
-            Document page = getDocument(baseUrl);
-            Elements teamElements = page.select("div#my-players-table").select("a[href^=/nfl/team/roster/_/name/]");
-            for(Element teamElement : teamElements){
-                NflTeam nflTeam = NflTeamFactory.whatTeam(teamElement.text());
-                String teamUrl = "http://espn.go.com" + teamElement.attr("href");
+        Document page = getDocument(baseUrl);
+        Elements teamElements = page.select("div#my-players-table").select("a[href^=/nfl/team/roster/_/name/]");
+        for (Element teamElement : teamElements) {
+            NflTeam nflTeam = NflTeamFactory.whatTeam(teamElement.text());
+            String teamUrl = "http://espn.go.com" + teamElement.attr("href");
 
-                teamRosterPageUrls.put(nflTeam, teamUrl);
-            }
-
-            return teamRosterPageUrls;
+            teamRosterPageUrls.put(nflTeam, teamUrl);
         }
+
+        return teamRosterPageUrls;
+    }
 }
