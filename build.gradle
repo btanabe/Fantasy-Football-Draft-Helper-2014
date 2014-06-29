@@ -6,9 +6,6 @@ version = '1.0'
 repositories {
     mavenCentral()
 
-    // OAUTH:
-    maven { url "http://oss.sonatype.org/content/repositories/signpost-snapshots" }
-
     // SWT:
     maven { url "https://swt-repo.googlecode.com/svn/repo/" }
 }
@@ -17,8 +14,14 @@ dependencies {
     // SWT:
     compile "org.eclipse.swt:org.eclipse.swt.cocoa.macosx.x86_64:4.3.2"
 
-    // OAUTH:
-    compile "oauth.signpost:signpost-core:1.2"
+    // JSOUP:
+    compile "org.jsoup:jsoup:1.7.3"
+
+    // JodaTime:
+    compile "joda-time:joda-time:2.3"
+
+    // Spring MongoDB:
+    compile "org.springframework.data:spring-data-mongodb:1.5.0.RELEASE"
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
